@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Three-Actor System</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: #ffffff;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Inter', 'Helvetica Neue', Arial, sans-serif;
+      padding: 32px 16px;
+    }
+    .eyebrow {
+      color: #bbb;
+      font-size: 10px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      margin-bottom: 6px;
+      font-weight: 500;
+    }
+    h1 {
+      color: #111;
+      font-size: 15px;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin-bottom: 40px;
+      text-align: center;
+    }
+    svg { max-width: 100%; overflow: visible; }
+    .node { cursor: pointer; }
+    .node circle { transition: fill 0.2s, stroke 0.2s; }
+    .node text { user-select: none; transition: fill 0.2s; }
+    #desc-panel {
+      margin-top: 8px;
+      height: 52px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      max-width: 360px;
+      text-align: center;
+    }
+    #desc-text {
+      color: #555;
+      font-size: 12.5px;
+      line-height: 1.7;
+      letter-spacing: 0.01em;
+    }
+    #desc-hint {
+      color: #ccc;
+      font-size: 11px;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+    }
+    .footer {
+      margin-top: 32px;
+      color: #ccc;
+      font-size: 9px;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+  </style>
+</head>
+<body>
+
+  <p class="eyebrow">CX in AI-Native Systems</p>
+  <h1>The Three-Actor System</h1>
+
+  <svg id="diagram" width="600" height="540" viewBox="0 0 600 540">
+    <defs>
+      <marker id="arr" markerWidth="6" markerHeight="6" refX="5" refY="3" orient="auto">
+        <path d="M0,0 L6,3 L0,6 Z" fill="#ccc" />
+      </marker>
+    </defs>
+
+    <!-- Edges -->
+    <line x1="300" y1="72" x2="96" y2="420" stroke="#e0e0e0" stroke-width="1"/>
+    <line x1="96" y1="420" x2="504" y2="420" stroke="#e0e0e0" stroke-width="1"/>
+    <line x1="300" y1="72" x2="504" y2="420" stroke="#e0e0e0" stroke-width="1"/>
+
+    <!-- Edge labels -->
+    <text x="164" y="232" text-anchor="middle" fill="#bbb" font-size="9" letter-spacing="0.1em" font-weight="500">VALUE DELIVERY</text>
+    <text x="300" y="450" text-anchor="middle" fill="#bbb" font-size="9" letter-spacing="0.1em" font-weight="500">OPERATIONAL LOGIC</text>
+    <text x="436" y="232" text-anchor="middle" fill="#bbb" font-size="9" letter-spacing="0.1em" font-weight="500">EXPERIENCE LAYER</text>
+
+    <!-- Center node -->
+    <circle cx="300" cy="308" r="26" fill="none" stroke="#e0e0e0" stroke-width="1"/>
+    <text x="300" y="303" text-anchor="middle" fill="#bbb" font-size="7.5" letter-spacing="0.12em" font-weight="600">THREE-WAY</text>
+    <text x="300" y="315" text-anchor="middle" fill="#bbb" font-size="7.5" letter-spacing="0.12em" font-weight="600">ALIGNMENT</text>
+
+    <!-- Spokes -->
+    <line x1="300" y1="105" x2="300" y2="282" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3 4"/>
+    <line x1="126" y1="406" x2="276" y2="325" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3 4"/>
+    <line x1="474" y1="406" x2="324" y2="325" stroke="#e8e8e8" stroke-width="1" stroke-dasharray="3 4"/>
+
+    <!-- CUSTOMER node -->
+    <g class="node" data-id="customer"
+       data-desc="Seeks progress. Brings attention, data, and trust. Defines the job to be done.">
+      <circle cx="300" cy="72" r="32" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+      <text x="300" y="73" text-anchor="middle" dominant-baseline="middle"
+            font-size="8" letter-spacing="0.14em" font-weight="700" fill="#222">CUSTOMER</text>
+      <text x="300" y="24" text-anchor="middle" fill="#bbb" font-size="8.5" letter-spacing="0.08em">Intent &amp; Trust</text>
+    </g>
+
+    <!-- BUSINESS node -->
+    <g class="node" data-id="business"
+       data-desc="Sustains the system. Imposes compliance, viability, and strategic positioning.">
+      <circle cx="96" cy="420" r="32" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+      <text x="96" y="415" text-anchor="middle" font-size="8" letter-spacing="0.14em" font-weight="700" fill="#222">BUSINESS</text>
+      <text x="96" y="468" text-anchor="middle" fill="#bbb" font-size="8.5" letter-spacing="0.08em">Constraints &amp; Governance</text>
+    </g>
+
+    <!-- AGENT node -->
+    <g class="node" data-id="agent"
+       data-desc="Interprets, routes, personalizes, decides. No longer neutral — an actor in its own right.">
+      <circle cx="504" cy="420" r="32" fill="#ffffff" stroke="#ccc" stroke-width="1"/>
+      <text x="504" y="421" text-anchor="middle" dominant-baseline="middle"
+            font-size="8" letter-spacing="0.14em" font-weight="700" fill="#222">AGENT</text>
+      <text x="504" y="468" text-anchor="middle" fill="#bbb" font-size="8.5" letter-spacing="0.08em">Judgment &amp; Scale</text>
+    </g>
+  </svg>
+
+  <div id="desc-panel">
+    <p id="desc-hint">tap an actor to expand</p>
+    <p id="desc-text" style="display:none;"></p>
+  </div>
+
+  <p class="footer">If any one breaks — the system destabilizes.</p>
+
+  <script>
+    const nodes = document.querySelectorAll('.node');
+    const descText = document.getElementById('desc-text');
+    const descHint = document.getElementById('desc-hint');
+    let activeId = null;
+
+    nodes.forEach(node => {
+      node.addEventListener('click', () => {
+        const id = node.dataset.id;
+        const circle = node.querySelector('circle');
+        const text = node.querySelector('text');
+
+        if (activeId === id) {
+          // Deactivate
+          circle.setAttribute('fill', '#ffffff');
+          circle.setAttribute('stroke', '#ccc');
+          text.setAttribute('fill', '#222');
+          descText.style.display = 'none';
+          descHint.style.display = 'block';
+          activeId = null;
+        } else {
+          // Deactivate previous
+          if (activeId) {
+            const prev = document.querySelector(`[data-id="${activeId}"]`);
+            prev.querySelector('circle').setAttribute('fill', '#ffffff');
+            prev.querySelector('circle').setAttribute('stroke', '#ccc');
+            prev.querySelector('text').setAttribute('fill', '#222');
+          }
+          // Activate current
+          circle.setAttribute('fill', '#111');
+          circle.setAttribute('stroke', '#111');
+          text.setAttribute('fill', '#ffffff');
+          descText.textContent = node.dataset.desc;
+          descText.style.display = 'block';
+          descHint.style.display = 'none';
+          activeId = id;
+        }
+      });
+    });
+  </script>
+</body>
+</html>
